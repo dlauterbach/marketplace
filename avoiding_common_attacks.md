@@ -8,7 +8,7 @@ Below is list of the measures taken to avoid common attacks.
 
 * All inputs to ```createListing``` function are validated using ```require```. The listing Title is limited to 32 characters and listing Description to 256 characters.  Listing Price is required to be greater than zero to prevent underflow.
 
-* Developed tests to test that a regular user is not able to execute "onlyAdmin" functions including assigning themselves as an administrator.
+* Developed tests to test that a regular user is not able to execute ```onlyAdmin``` functions including assigning themselves as an administrator.
 
 * Implemented ```Ownable``` contract to restrict write access to the storage contract ```EternalStorage``` only to the business logic contract ```MarketPlace```.
 

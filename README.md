@@ -32,11 +32,11 @@ cmd /c mklink /J src\contracts build\contracts
 ```
 If using Linux:
 ```
-ln -s /<absolute path>/build/contracts /<absolute path>/src/contracts
+ln -s /<absolute path to marketplace>/build/contracts /<absolute path to marketplace>/src/contracts
 ```
 *(On Linux the source and target directories must be specified as absolute paths.)*
 
-In separate terminal/shell and launch Ganache:
+In separate terminal/shell, launch Ganache:
 ```
 ganache-cli
 ```
@@ -71,7 +71,7 @@ A list of all active listings is displayed under the "All Listings" tab.  If the
 
 ![Initial Load Page](images/InitialLoadPage.jpg)
 
-To add a new listing, select ```My Listings``` and then ```Create Listing```. Provide listing ```Title```, ```Price``` and ```Description```.  Then click ```Create Listing```.
+To add a new listing, select ```My Listings``` and then ```Create Listing```. Provide listing ```Title```, ```Price``` and ```Description```.  *(Inputs for ```Photo``` and ```Email``` are not yet implemented.)*  Then click ```Create Listing```.
 
 ![Create Listing Modal](images/CreateListingModal.jpg)
 
@@ -112,3 +112,7 @@ To unfreeze the system, select System > Unfreeze System.
 ![Unfreeze System Modal](images/UnFreezeSystemModal.jpg)
 
 It is also possible to add and remove users as administrators.  If a user attempts to remove the contract owner (Account 1 in this case) they will be blocked with a transaction revert exception.  The owner of the contract must always remain an administrator.
+
+## Supporting Documents
+* [Design Pattern Decisions](./design_pattern_decisions.md)
+* [Avoiding Common Attacks](./avoiding_common_attacks.md)
