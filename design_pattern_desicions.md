@@ -7,7 +7,7 @@ All contract functions are decorated with modifiers that will revert with  excep
 Implemented a mapping (called "admins") to provide administrator access to specific user addresses.  The mapping key is a user address and the value for each key is a boolean, set to either "true" or "false".  This allowed me to limit access to certain "adminstrator only" functions with the modifier "onlyAdmin".
 
 ## Events
-Events are emitted for significant contract state changes that are useful for updating the dApp.  This allows the dApp to efficiently access contract state changes (like when a listing is created, bought or cancelled) from the EVM transaction log.  This eliminates the concern with exceeding block gas limit that would exist if we attempted to retrieve this directly from the contract using function calls. 
+Events are emitted for significant contract state changes that are useful for updating the DApp.  This allows the DApp to efficiently access contract state changes (like when a listing is created, bought or cancelled) from the EVM transaction log.  This eliminates the concern with exceeding block gas limit that would exist if we attempted to retrieve this directly from the contract using function calls. 
 
 ## Circuit Breaker
 Administrators are allowed to call the "lock" and "unlock" functions.  When lock is called it sets the contract state variable "locked" to true.  Modifier "isLocked" decorates all listing related functions to prevent any listing related transactions from executing while "locked" is true.

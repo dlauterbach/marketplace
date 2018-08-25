@@ -1,35 +1,55 @@
-# Ethereum Marketplace dApp
+# Ethereum Marketplace DApp
 
-This repository contains an Ethereum Marketplace dApp. It is similar to a very basic eBay.  Users can list items for sale and other users can buy them with Ether.  It was developed as the final project for ConsenSys Academy's 2018 Developer Program.  The smart contracts were developed in [Solidity](https://solidity.readthedocs.io/en/v0.4.24/) using the [Truffle](https://github.com/trufflesuite/truffle) framework.  The user interface was developed using [React](https://reactjs.org/) and [reactstrap](https://reactstrap.github.io/).
+This repository contains an Ethereum Marketplace DApp. It is similar to a very basic eBay.  Users can list items for sale and other users can buy them with Ether.  It was developed as the final project for ConsenSys Academy's 2018 Developer Program.  The smart contracts were developed in [Solidity](https://solidity.readthedocs.io/en/v0.4.24/) using the [Truffle](https://github.com/trufflesuite/truffle) framework.  The user interface was developed using [React](https://reactjs.org/) and [reactstrap](https://reactstrap.github.io/).
 
 A React app folder was created using [Create React App](https://github.com/facebookincubator/create-react-app).  `truffle init` was used to create a separate Truffle project folder.  The two folders were merged by copying one over the other.  To allow the [web3](https://github.com/ethereum/wiki/wiki/JavaScript-API) API in the React app to access the contract ABIs, the Truffle `contracts` folder was symbolically linked to appear under the React `src` folder.
 
 ## Steps to Install and Run:
-*(Assuming you've already installed Node.js, npm, ganache-cli, Truffle and MetaMask, and have cloned this repo.)*<p>
-From the root project folder, run the following commands.
+*(Assuming you've already installed Node.js, ganache-cli and Truffle and enabled MetaMask extension in your browser.)*
+
+Clone this repository:
 ```
+git clone https://github.com/dlauterbach/marketplace.git
+```
+Change directory to ```marketplace``` folder and install all requisite npm packages (as listed in ```package.json```):
+```
+cd marketplace
 npm install
 ```
-Link contract artifacts folder.  If using Windows Command Prompt:
+Compile smart contracts:
+```
+truffle compile
+```
+This creates the contract artifacts in folder ```build\contracts```.
+
+The ```contracts``` folder must be linked to appear under ```src```.  If using Windows Command Prompt:
 ```
 mklink /J src\contracts build\contracts 
 ```
-Or, if using Windows Powershell:
+If using Windows Powershell:
 ```
 cmd /c mklink /J src\contracts build\contracts
 ```
-Launch Ganache:
+If using Linux:
+```
+ln -s /<absolute path>/build/contracts /<absolute path>/src/contracts
+```
+*(On Linux the source and target directories must be specified as absolute paths.)*
+
+In separate terminal/shell and launch Ganache:
 ```
 ganache-cli
 ```
-*(I run this and all subsequent commands in a Windows PowerShell)*.
+Copy the mnemonic phrase from the Ganache console. Use it to import this account using seed phrase into MetaMask in your browser.  Before importing select network ```Localhost 8545``` in MetaMask.
 
-After launching Ganache, copy the mnemonic phrase from the Ganache console. Use it to import this account using seed phrase into MetaMask in your browser.  Before importing select network ```Localhost 8545``` in MetaMask.
-
-In another shell, to compile, migrate and test the smart contracts:
+Migrate contracts to ganache:
 ```
-truffle compile
 truffle migrate
+```
+![Contract Migration](images/ContractMigration.jpg)
+
+To execute smart contract tests:
+```
 truffle test
 ```
 All tests should pass:
@@ -40,7 +60,7 @@ Launch application in development mode on http://localhost:3000:
 ```
 npm start
 ```
-## What does this application do?
+## What does it do?
 When the application is accessed it first checks that injected web3 is detected in the browser.  If not, it displays "<span style="color:red">MetaMask is Not Enabled!</span>".  If MetaMask is enabled, but user is not logged into a MetaMask wallet, it displays "<span style="color:red">MetaMask Account is Locked!</span>". 
 
 It also checks if the current user account is an application administrator.  If the current MetaMask wallet was generated using the mnemonic phrase from Ganache, then MetaMask Account 1 will have administrator access and can assign other adminstrators from the displayed ```System``` dropdown menu.  Currently, there are only two special privileges that an administrator has:
