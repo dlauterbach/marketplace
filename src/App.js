@@ -512,6 +512,7 @@ class App extends Component {
                 ' '
               }
             </Navbar>
+            <p/>
             <Card>
               <CardHeader>
                 Your Account Info

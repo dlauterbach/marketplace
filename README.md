@@ -61,7 +61,7 @@ Launch application in development mode on http://localhost:3000:
 npm start
 ```
 ## What does it do?
-When the application is accessed it first checks that injected web3 is detected in the browser.  If not, it displays "<span style="color:red">MetaMask is Not Enabled!</span>".  If MetaMask is enabled, but user is not logged into a MetaMask wallet, it displays "<span style="color:red">MetaMask Account is Locked!</span>". 
+When the application is accessed it first checks that injected web3 is detected in the browser.  If not, "MetaMask is Not Enabled!" is displayed under ```Your Account Info```.  If MetaMask is enabled, but user is not logged into a MetaMask wallet, "MetaMask Account is Locked!" is displayed.
 
 It also checks if the current user account is an application administrator.  If the current MetaMask wallet was generated using the mnemonic phrase from Ganache, then MetaMask Account 1 will have administrator access and can assign other adminstrators from the displayed ```System``` dropdown menu.  Currently, there are only two special privileges that an administrator has:
 1. Assign or revoke administrator access for other users.
@@ -116,3 +116,4 @@ It is also possible to add and remove users as administrators.  If a user attemp
 ## Supporting Documents
 * [Design Pattern Decisions](./design_pattern_decisions.md)
 * [Avoiding Common Attacks](./avoiding_common_attacks.md)
+* [Rinkeby Contract Addresses](./deployed_addresses.txt)
