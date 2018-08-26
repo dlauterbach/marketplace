@@ -71,11 +71,11 @@ A list of all active listings is displayed under the "All Listings" tab.  If the
 
 ![Initial Load Page](images/InitialLoadPage.jpg)
 
-To add a new listing, select ```My Listings``` and then ```Create Listing```. Provide listing ```Title```, ```Price``` and ```Description```.  *(Inputs for ```Photo``` and ```Email``` are not yet implemented.)*  Then click ```Create Listing```.
+To add a new listing, select ```My Listings``` and then ```Create Listing```. Provide listing ```Title```, ```Price```, ```Description```, and ```Photo```(optional).  Then click ```Create Listing```.
 
 ![Create Listing Modal](images/CreateListingModal.jpg)
 
-Confirm transaction in MetaMask.  In a few seconds when the block for the transaction has been mined, the new listing will appear under both ```All Listings``` and ```My Listings``` tabs:
+If you selected a photo, you will have to wait a few seconds for it to be uploaded to IPFS before your transaction is available in MetaMask for confirmation.  A few seconds after you confirm the transaction, when the block for the transaction has been mined, the new listing will appear under both ```All Listings``` and ```My Listings``` tabs:
 
 ![Active Listing Page](images/ActiveListingPage.jpg)
 
@@ -83,19 +83,21 @@ The listing will show with status of "Selling" under the ```My Listings```.
 
 *(If after confirming a transaction in MetaMask it fails with an "RPC Error...", in MetaMask go to "Settings" and click "Reset Account". MetaMask can get confused when running on a private network if you stop and restart Ganache.)*.
 
-To view details of a listing, click on it's Title.  If you view the listing from the same account that created it, you will see a button to cancel the listing:
+To view details of a listing, click on it's Title.  If you view the listing from the same account that created it, you will see a button to ```Cancel Listing```:
 
 ![Listing Details Modal as Seller](images/ListingDetailsModalAsSeller.jpg)
 
-When the transaction is complete the transaction will display under ```My Listings``` only with Status of "Cancelled".
+After clicking ```Cancel Listing```, when the transaction is complete, the transaction will display under ```My Listings``` only with Status of ```Cancelled```.
 
 ![Cancelled Listing Page](images/CancelledListingPage.jpg)
 
-If you create and switch to "Account 2" in MetaMask and then reload the page, the page will update to reflect the new Account 2 address and balance. The ```System``` menu in the upper right will disappear since Account 2 is not an administrator. Now if you view details for a listing, you will see a button to "Buy" the listing:
+If you create and/or switch to "Account 2" in MetaMask and then reload the page, the page will update to reflect the new Account 2 address and balance. The ```System``` menu in the upper right will disappear since Account 2 is not an administrator. Now if you view details for a listing, you will see a button to "Buy" the listing:
 
 ![Listing Details Modal as Buyer](images/ListingDetailsModalAsBuyer.jpg)
 
-If you click "Buy", MetaMask will display pending transaction for the price of the listing.  After transaction completion the listing will disapper from ```All Listings``` tab and your displayed balance will decrease by the price of the listing.  If you switch back to Account 1 and click ```My Listings```, the listing will display with Status of Sold:
+If you click "Buy", MetaMask will display pending transaction for the price of the listing.  After transaction completion the listing will disapper from ```All Listings``` tab and your displayed balance will decrease by the price of the listing.  
+
+If you switch back to Account 1 (and reload the page) and click ```My Listings```, the listing will display with Status of ```Sold```:
 
 ![Sold Listing Page](images/SoldListingPage.jpg)
 
@@ -103,7 +105,7 @@ An administrator can "Freeze" the system if needed to stop processing of all lis
 
 ![Freeze System Modal](images/FreezeSystemModal.jpg)
 
-When the transaction is confirmed and completed, the system will be frozen.  If you now attempt to buy a listing, an alert will display and the transaction will be blocked:
+When the transaction is confirmed and completed, the system will be frozen.  If you now attempt to create, cancel or buy a listing, an alert will display and the transaction will be blocked:
 
 ![Buy Listing Blocked](images/BuyListingBlocked.jpg)
 

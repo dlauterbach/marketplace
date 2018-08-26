@@ -129,8 +129,9 @@ contract MarketPlace is Ownable {
     * @param _title - Title of the listing. Must be less than 32 characters in length.
     * @param _description - Description of the listing. Must be less than 256 characters in length.
     * @param _price - Price of the listing. Must be greater than 0.
+    * @param _photoIPFSHash - PFS hash for listing photo.
     */
-  function createListing(string _title, string _description, uint _price) 
+  function createListing(string _title, string _description, uint _price, string _photoIPFSHash) 
     public 
     isNotLocked() 
   {
@@ -146,7 +147,7 @@ contract MarketPlace is Ownable {
       _price > 0,
       "Listing price must be greater than 0."
     );
-    eternalStorage.createListing(_title, _description, _price, msg.sender, 0x0);
+    eternalStorage.createListing(_title, _description, _price, _photoIPFSHash, msg.sender, 0x0);
     uint _id = eternalStorage.getListingCount();
     emit createListingEvent(_id);
   }
@@ -186,12 +187,13 @@ contract MarketPlace is Ownable {
     */
   function getListing(uint _id) 
     public view
-    returns(string _title, string _description, uint _price, address _seller, address _buyer)
+    returns(string _title, string _description, uint _price, string _photoIPFSHash, address _seller, address _buyer)
   {
     return(
       eternalStorage.getStringValue(keccak256(abi.encodePacked("listing_title", _id))),
       eternalStorage.getStringValue(keccak256(abi.encodePacked("listing_description", _id))),
       eternalStorage.getUIntValue(keccak256(abi.encodePacked("listing_price", _id))),
+      eternalStorage.getStringValue(keccak256(abi.encodePacked("listing_photohash", _id))),
       eternalStorage.getAddressValue(keccak256(abi.encodePacked("listing_seller", _id))),
       eternalStorage.getAddressValue(keccak256(abi.encodePacked("listing_buyer", _id)))
     );

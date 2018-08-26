@@ -13,26 +13,22 @@ class CreateListingModal extends React.Component {
             <Form>
               <FormGroup>
                 <Label for="itemTitle">Title</Label>
-                <Input type="text" name="itemTitle" id="itemTitle" onChange={this.props.inputChangeHandler} placeholder="Cowboy Hat"/>
+                <Input type="text" name="itemTitle" id="itemTitle" onChange={this.props.inputChangeHandler} required placeholder="Ex. Cowboy Hat"/>
               </FormGroup>
               <FormGroup>
                 <Label for="itemPrice">Price (ETH)</Label>
-                <Input type="text" name="itemPrice" id="itemPrice" onChange={this.props.inputChangeHandler} placeholder=".1"/>
+                <Input type="text" name="itemPrice" id="itemPrice" onChange={this.props.inputChangeHandler} placeholder="Ex. .1"/>
               </FormGroup>
               <FormGroup>
                 <Label for="itemDescription">Description</Label>
-                <Input type="textarea" name="itemDescription" id="itemDescription" onChange={this.props.inputChangeHandler} placeholder="Nice cowboy hat."/>
+                <Input type="textarea" name="itemDescription" id="itemDescription" onChange={this.props.inputChangeHandler} placeholder="Ex. Nice cowboy hat."/>
               </FormGroup>
               <FormGroup>
                 <Label for="itemPhoto">Photo</Label>
-                <Input type="file" name="itemPhoto" id="itemPhoto" disabled/>
+                <Input type="file" name="itemPhoto" id="itemPhoto" onChange={this.props.inputChangeHandler}/>
                 <FormText color="muted">
                   Include a photograph of your item.
                 </FormText>
-                </FormGroup>
-                <FormGroup>
-                  <Label for="sellerEmail">Email</Label>
-                  <Input type="email" name="sellerEmail" id="sellerEmail" placeholder="John.Doe@gmail.com" onChange={this.props.inputChangeHandler} disabled/>
                 </FormGroup>
               </Form>
             </ModalBody>

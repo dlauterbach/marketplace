@@ -11,6 +11,7 @@ import AddAdminModal from './modals/AddAdminModal';
 import RemoveAdminModal from './modals/RemoveAdminModal';
 import FreezeSystemModal from './modals/FreezeSystemModal';
 import UnFreezeSystemModal from './modals/UnFreezeSystemModal';
+import ipfs from './Ipfs'
 
 class App extends Component {
   constructor(props) {
@@ -50,7 +51,9 @@ class App extends Component {
       },
       isAdmin: false,
       collapsed: true,
-      isFrozen: true
+      isFrozen: true,
+      photoFileBuffer: null,
+      photoIPFSHash: null
     }
   }
 
@@ -114,7 +117,17 @@ class App extends Component {
         const isSeller = listing.seller === this.state.account ? true : false
         console.log("handleViewListingModal - isSeller: "+isSeller)
         let onSubmitHandler = isSeller ? this.handleCancelListing : this.handleBuyListing
-        this.setState({ viewListingModal: { show: true, isSeller: isSeller, modalOnSubmitHandler: onSubmitHandler, error: false, ...listing } })
+        console.log("handleViewListingModal - listing.photoIPFSHash: "+listing.photoIPFSHash)
+        if (listing.photoIPFSHash != null && listing.photoIPFSHash != "") {
+          ipfs.cat(listing.photoIPFSHash, (err, photoData)=> {
+            if (!err) {
+              var blob = new Blob([photoData], {type:"image/jpg"})
+              this.setState({ viewListingModal: { show: true, isSeller: isSeller, imageUrl: window.URL.createObjectURL(blob), modalOnSubmitHandler: onSubmitHandler, error: false, ...listing } })
+            }
+          })
+        } else {
+          this.setState({ viewListingModal: { show: true, isSeller: isSeller, modalOnSubmitHandler: onSubmitHandler, error: false, ...listing } })
+        }
       }).catch(error => {
         this.setState({ viewListingModal: { show: true, error: true } })
       })
@@ -124,27 +137,44 @@ class App extends Component {
   handleCreateListing = e => {
     e.preventDefault()
     const title = this.state.itemTitle
-    const price = this.state.itemPrice
-    const description = this.state.itemDescription
-    const photo = this.state.itemPhoto
-    const email = this.state.sellerEmail
-    this.toggleCreateListingModal()
     console.log("handleCreateListing - title: "+title)
+    const price = this.state.itemPrice
     console.log("handleCreateListing - price: "+price)
+    const description = this.state.itemDescription
     console.log("handleCreateListing - description: "+description)
-    console.log("handleCreateListing - photo: "+photo)
-    console.log("handleCreateListing - email: "+email)
-    this.state.marketPlaceContract.createListing(
-      title, 
-      description, 
-      this.state.web3.toWei(price), 
-      {from: this.state.account}
-    ).then((result) => {
-      console.log("handleCreateListing - Listing created")
-    }).catch((err) => {
-      console.log("handleCreateListing - Error occurred")
-      console.error(err)
-    })
+    const email = this.state.sellerEmail
+    //console.log("handleCreateListing - email: "+email)
+    this.toggleCreateListingModal()
+    console.log("handleCreateListing - this.state.photoFileBuffer: "+this.state.photoFileBuffer)
+    if (this.state.photoFileBuffer != null && this.state.photoFileBuffer != "") {
+      ipfs.add(this.state.photoFileBuffer).then((ipfsHash) => {
+        console.log("handleCreateListing - ipfsHash[0].hash: "+ipfsHash[0].hash)
+        return this.state.marketPlaceContract.createListing(
+          title, 
+          description, 
+          this.state.web3.toWei(price), 
+          ipfsHash[0].hash,
+          {from: this.state.account})
+      }).then((result) => {
+        console.log("handleCreateListing - Listing created")
+      }).catch((err) => {
+        console.log("handleCreateListing - Error occurred")
+        console.error(err)
+      })
+    } else {
+      this.state.marketPlaceContract.createListing(
+        title, 
+        description, 
+        this.state.web3.toWei(price), 
+        "",
+        {from: this.state.account})
+      .then((result) => {
+        console.log("handleCreateListing - Listing created")
+      }).catch((err) => {
+        console.log("handleCreateListing - Error occurred")
+        console.error(err)
+      })
+    }
   }
 
   handleBuyListing = e => {
@@ -415,8 +445,9 @@ class App extends Component {
             title: listingData[0],
             description: listingData[1],
             price: parseFloat(this.state.web3.fromWei(parseInt(listingData[2],10),"ether")).toFixed(3),
-            seller: listingData[3],
-            buyer: listingData[4]
+            photoIPFSHash: listingData[3],
+            seller: listingData[4],
+            buyer: listingData[5]
           }
           resolve(listing);
         })
@@ -448,14 +479,44 @@ class App extends Component {
     })
   }
 
-  handleInputChange = e => {
-    const target = e.target;
-    const value = target.type === 'checkbox' ? target.checked : target.value;
-    const name = target.name;
+  readUploadedFileAsArrayBuffer = (inputFile) => {
+    console.log("readUploadedFileAsArrayBuffer - inputFile: "+inputFile)
+    const temporaryFileReader = new FileReader();
 
-    this.setState({
-      [name]: value
+    return new Promise((resolve, reject) => {
+      temporaryFileReader.onerror = () => {
+        temporaryFileReader.abort();
+        reject(new DOMException("Problem parsing input file."));
+      };
+
+      temporaryFileReader.onload = () => {
+        resolve(temporaryFileReader.result);
+      };
+      temporaryFileReader.readAsArrayBuffer(inputFile);
     });
+  };
+
+  handleInputChange = async (e) => {
+    const target = e.target;
+    var value = target.type === 'checkbox' ? target.checked : target.value;
+    if (target.files) {
+      const file = target.files[0];
+      console.log("handleInputChange - file: "+file)
+      try {
+        const photoFileBuffer = await this.readUploadedFileAsArrayBuffer(file);
+        console.log("handleInputChange - photoFileBuffer: "+photoFileBuffer)
+        this.setState({
+          photoFileBuffer: Buffer.from(photoFileBuffer)
+        });
+      } catch (e) {
+        console.log(e);
+      }
+    } else {
+      const name = target.name;
+      this.setState({
+        [name]: value
+      });
+    }
   }
 
   render() {

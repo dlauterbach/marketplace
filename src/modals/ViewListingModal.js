@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Button, Modal, ModalHeader, ModalBody, ModalFooter, Row, Col } from 'reactstrap';
+import { Form, Button, Modal, ModalHeader, ModalBody, ModalFooter, Row, Col, CardImg } from 'reactstrap';
 
 class ViewListingModal extends React.Component {
 
@@ -7,6 +7,7 @@ class ViewListingModal extends React.Component {
     console.log("ViewListingModal - this.props.modal.show: "+this.props.modal.show)
     console.log("ViewListingModal - this.props.modal.id: "+this.props.modal.id)
     console.log("ViewListingModal - this.props.modal.title: "+this.props.modal.title)
+    console.log("ViewListingModal - this.props.modal.photoIPFSHash: "+this.props.modal.photoIPFSHash)
     console.log("ViewListingModal - this.props.modal.isSeller: "+this.props.modal.isSeller)
     console.log("ViewListingModal - this.props.modal.modalOnSubmitHandler: "+this.props.modal.modalOnSubmitHandler)
     console.log("ViewListingModal - this.props.modal.error: "+this.props.modal.error)
@@ -45,6 +46,17 @@ class ViewListingModal extends React.Component {
               </Col>
               <Col>
                 {this.props.modal.id}
+              </Col>
+            </Row>
+            <Row>
+              <Col>
+              {
+                this.props.modal.imageUrl 
+              ? 
+                <img src={this.props.modal.imageUrl} width="100%" align="center" />
+              : 
+                ''
+              }
               </Col>
             </Row>
           </ModalBody>
