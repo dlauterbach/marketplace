@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, FormGroup, Button, Modal, ModalHeader, ModalBody, ModalFooter, Row, Col } from 'reactstrap';
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 
 class FreezeSystemModal extends React.Component {
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Button, Modal, ModalHeader, ModalBody, ModalFooter, Row, Col, CardImg } from 'reactstrap';
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Row, Col } from 'reactstrap';
 
 class ViewListingModal extends React.Component {
 

@@ -4,6 +4,8 @@ This repository contains an Ethereum Marketplace DApp. It is similar to a very b
 
 A React app folder was created using [Create React App](https://github.com/facebookincubator/create-react-app).  `truffle init` was used to create a separate Truffle project folder.  The two folders were merged by copying one over the other.  To allow the [web3](https://github.com/ethereum/wiki/wiki/JavaScript-API) API in the React app to access the contract ABIs, the Truffle `contracts` folder was symbolically linked to appear under the React `src` folder.
 
+This DApp stores listing photographs to [IPFS](https://ipfs.io/) via [INFURA](https://infura.io/) using [ipfs-api](https://github.com/ipfs/js-ipfs-api).
+
 ## Steps to Install and Run:
 *(Assuming you've already installed Node.js, ganache-cli and Truffle and enabled MetaMask extension in your browser.)*
 

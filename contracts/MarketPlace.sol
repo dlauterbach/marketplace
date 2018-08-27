@@ -1,6 +1,5 @@
 pragma solidity ^0.4.24;
 
-//import "./Ownable.sol";
 import "./ListingsLibrary.sol";
 import "./EternalStorage.sol";
 
@@ -32,8 +31,8 @@ contract MarketPlace is Ownable {
   }
 
   /*
-   * Declare "Listing" events to allow application access to all listings and to trigger
-   * application user interface updates.
+   * Declare "Listing" events to allow DApp access to all listings and to trigger
+   * DApp user interface updates.
    */
   event createListingEvent(
     uint indexed listingId
@@ -46,7 +45,7 @@ contract MarketPlace is Ownable {
   );
 
   /*
-   * Declare "Admin" events to allow application to display list of administrators.
+   * Declare "Admin" events to allow DApp to display list of administrators.
    */
   event addAdminEvent(
     address indexed user
@@ -129,7 +128,7 @@ contract MarketPlace is Ownable {
     * @param _title - Title of the listing. Must be less than 32 characters in length.
     * @param _description - Description of the listing. Must be less than 256 characters in length.
     * @param _price - Price of the listing. Must be greater than 0.
-    * @param _photoIPFSHash - PFS hash for listing photo.
+    * @param _photoIPFSHash - IPFS hash for listing photo.
     */
   function createListing(string _title, string _description, uint _price, string _photoIPFSHash) 
     public 
@@ -184,6 +183,7 @@ contract MarketPlace is Ownable {
 
   /** @dev Gets all attributes for a listing.
     * @param _id - Id of the listing.
+    * @return Listing title, description, price, photoIPFSHash, seller, buyer.
     */
   function getListing(uint _id) 
     public view
