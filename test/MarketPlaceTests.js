@@ -22,14 +22,14 @@ contract('MarketPlace', function(accounts) {
             eventEmitted = true
         })
 
-        await marketPlace.createListing(title, description, price, {from: alice})
+        await marketPlace.createListing(title, description, price, "", {from: alice})
         const result = await marketPlace.getListing.call(id)
 
         assert.equal(result[0], title, 'The title of created listing does not match the expected value.')
         assert.equal(result[1], description, 'The description of created listing does not match the expected value.')
         assert.equal(result[2].toString(10), price, 'The price of created listing does not match the expected value.')
-        assert.equal(result[3], alice, 'The seller address of created listing does not match expected value.')
-        assert.equal(result[4], emptyAddress, 'The buyer address of created listing does not match expected value.')
+        assert.equal(result[4], alice, 'The seller address of created listing does not match expected value.')
+        assert.equal(result[5], emptyAddress, 'The buyer address of created listing does not match expected value.')
         assert.equal(eventEmitted, true, 'Creating a new listing should emit a Create Listing event')
     })
 
@@ -53,7 +53,7 @@ contract('MarketPlace', function(accounts) {
 
         const result = await marketPlace.getListing.call(id)
 
-        assert.equal(result[4], bob, 'The buyer address should be set to bob listing purchased.')
+        assert.equal(result[5], bob, 'The buyer address should be set to bob listing purchased.')
         assert.equal(aliceBalanceAfter, aliceBalanceBefore + parseInt(price, 10), "Alice's balance should be increased by the price of the purchased listing.")
         assert.isBelow(bobBalanceAfter, bobBalanceBefore - price, "Bob's balance should be reduced by more than the price of the purchased listing (including gas costs).")
         assert.equal(eventEmitted, true, 'Purchase of a listing should emit a buy listing event.')
@@ -67,7 +67,7 @@ contract('MarketPlace', function(accounts) {
             id = res.args.listingId
         })
 
-        await marketPlace.createListing(title, description, price, {from: alice})
+        await marketPlace.createListing(title, description, price, "", {from: alice})
         await marketPlace.getListing.call(id)
 
         var eventEmitted = false
@@ -80,7 +80,7 @@ contract('MarketPlace', function(accounts) {
         await marketPlace.cancelListing(id, {from: alice})
         const result = await marketPlace.getListing.call(id)
 
-        assert.equal(result[4], alice, 'The buyer address should match seller address.')
+        assert.equal(result[5], alice, 'The buyer address should match seller address.')
         assert.equal(eventEmitted, true, 'Cancellation of a listing should emit a cancel listing event.')
     })
 
@@ -88,21 +88,21 @@ contract('MarketPlace', function(accounts) {
         const marketPlace = await MarketPlace.deployed()
 
         try {
-          await marketPlace.createListing("", description, price, {from: alice})
+          await marketPlace.createListing("", description, price, "", {from: alice})
           assert.fail("Attempting to create listing with zero length title should throw an error.");
         }
         catch (err) {
           assert.include(err.message, "revert", "The error message should contain 'revert'");
         }
         try {
-          await marketPlace.createListing(title, "", price, {from: alice})
+          await marketPlace.createListing(title, "", price, "", {from: alice})
           assert.fail("Attempting to create listing with zero length description should throw an error.");
         }
         catch (err) {
           assert.include(err.message, "revert", "The error message should contain 'revert'");
         }
         try {
-          await marketPlace.createListing(title, description, 0, {from: alice})
+          await marketPlace.createListing(title, description, 0, "", {from: alice})
           assert.fail("Attempting to create listing with price of 0 should throw an error.");
         }
         catch (err) {
@@ -222,7 +222,7 @@ contract('MarketPlace', function(accounts) {
         await marketPlace.isFrozen.call()
 
         try {
-          await marketPlace.createListing(title, description, price, {from: alice})
+          await marketPlace.createListing(title, description, price, "", {from: alice})
           assert.fail("Attempting to create a listing while the system is frozen should throw an error.");
         }
         catch (err) {

@@ -1,5 +1,5 @@
 import React from 'react';
-import {Form, FormGroup, FormText, Label, Input, Button, Modal, ModalHeader, ModalBody, ModalFooter} from 'reactstrap';
+import {Form, FormGroup, Label, Input, Button, Modal, ModalHeader, ModalBody, ModalFooter} from 'reactstrap';
 
 class AddAdminModal extends React.Component {
 
