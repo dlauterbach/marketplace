@@ -2,7 +2,7 @@ Deployed to Rinkeby using:
 truffle migrate -f 2 --network rinkeby
 
 Rinkeby Contract Addresses:
-  Ownable: 0x2e0fcffa7cf1db89cc15714a19d5fd75e47d71ed
-  EternalStorage: 0xd493e0efb95e61420b5aa070e6fbd915522801fa
-  ListingsLibrary: 0xf4b84c975d991c2cd330775a65115727f87bfedd
-  MarketPlace: 0x36a82e39adf996751892a952163cc826ca639524
+  Ownable: 0xcc6e72f5490d456b09cea759bdada5aa7e99d5ac
+  EternalStorage: 0x6824f5787053b035351baa997cb8ca69962ba9b4
+  ListingsLibrary: 0xbd5453e48149862fda8721ac853bf98eb7718718
+  MarketPlace: 0xb43efd7c7f8b192830968617041a7bc845d17a57
