@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem, Navbar, NavbarBrand, NavbarToggler, Collapse, TabContent, TabPane, NavItem, NavLink, Card, CardHeader, CardBody, Button } from 'reactstrap';
+import { UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem, Nav, Navbar, NavbarBrand, NavbarToggler, Collapse, TabContent, TabPane, NavItem, NavLink, Card, CardHeader, CardBody, Button } from 'reactstrap';
 import classnames from 'classnames';
 import MarketPlaceContract from './contracts/MarketPlace.json'
 import getWeb3 from './utils/getWeb3'
