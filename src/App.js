@@ -514,7 +514,8 @@ class App extends Component {
     } else {
       const name = target.name;
       this.setState({
-        [name]: value
+        [name]: value,
+        photoFileBuffer: null
       });
     }
   }
