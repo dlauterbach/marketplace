@@ -4,7 +4,6 @@ import { Form, FormGroup, FormText, Label, Input, Button, Modal, ModalHeader, Mo
 class CreateListingModal extends React.Component {
 
   render() {
-    console.log("CreateListingModal - this.props.modal.show: "+this.props.modal.show)
     return (
       <div>
         <Modal isOpen={this.props.modal.show} toggle={this.props.toggleModal}>

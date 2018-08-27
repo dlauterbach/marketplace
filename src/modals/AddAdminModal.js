@@ -4,8 +4,6 @@ import {Form, FormGroup, Label, Input, Button, Modal, ModalHeader, ModalBody, Mo
 class AddAdminModal extends React.Component {
 
   render() {
-    console.log("AddAdminModal - this.props.modal.show: "+this.props.modal.show)
-    console.log("AddAdminModal - this.props.modal.modalOnSubmitHandler: "+this.props.modal.modalOnSubmitHandler)
     return (
       <div>
         <Modal isOpen={this.props.modal.show} toggle={this.props.toggleModal}>

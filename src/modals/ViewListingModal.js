@@ -4,13 +4,6 @@ import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Row, Col } from 're
 class ViewListingModal extends React.Component {
 
   render() {
-    console.log("ViewListingModal - this.props.modal.show: "+this.props.modal.show)
-    console.log("ViewListingModal - this.props.modal.id: "+this.props.modal.id)
-    console.log("ViewListingModal - this.props.modal.title: "+this.props.modal.title)
-    console.log("ViewListingModal - this.props.modal.photoIPFSHash: "+this.props.modal.photoIPFSHash)
-    console.log("ViewListingModal - this.props.modal.isSeller: "+this.props.modal.isSeller)
-    console.log("ViewListingModal - this.props.modal.modalOnSubmitHandler: "+this.props.modal.modalOnSubmitHandler)
-    console.log("ViewListingModal - this.props.modal.error: "+this.props.modal.error)
     return (
       <div>
         <Modal isOpen={this.props.modal.show} toggle={this.props.toggleModal}>
@@ -53,7 +46,7 @@ class ViewListingModal extends React.Component {
               {
                 this.props.modal.imageUrl 
               ? 
-                <img src={this.props.modal.imageUrl} width="100%" align="center" />
+                <img src={this.props.modal.imageUrl} width="100%" alt="ListingPhoto" align="center" />
               : 
                 ''
               }

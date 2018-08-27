@@ -4,7 +4,6 @@ import {Form, FormGroup, Label, Input, Button, Modal, ModalHeader, ModalBody, Mo
 class RemoveAdminModal extends React.Component {
 
   render() {
-    console.log("RemoveAdminModal - this.props.modal.show: "+this.props.modal.show)
     return (
       <div>
         <Modal isOpen={this.props.modal.show} toggle={this.props.toggleModal}>

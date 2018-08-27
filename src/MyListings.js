@@ -1,10 +1,7 @@
 import React from 'react'
-import { Button, Row, Col, Table, Card} from 'reactstrap';
+import { Table, Card } from 'reactstrap';
 
 const MyListings = (props) => {
-  console.log("Listings - props.state.listingsLoading: "+props.state.listingsLoading)
-  console.log("Listings - props.listingsList: "+props.listingsList)
-  console.log("Listings - Object.keys(props.listingsList).length: "+Object.keys(props.listingsList).length)
   return (
       <Card>
       <Table>
