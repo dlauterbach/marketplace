@@ -6,7 +6,7 @@ Below is list of the measures taken to avoid common attacks.
 
 * There is only one "payable" function ```buyListing```.  This function performs all state variable updates first and then performs the transfer of Ether from buyer to seller last.
 
-* All inputs to ```createListing``` function are validated using ```require```. The listing Title is limited to 32 characters and listing Description to 256 characters.  Listing Price is required to be greater than zero to prevent underflow.
+* Inputs to ```createListing``` function are validated using ```require```. The listing Title is limited to 32 characters and listing Description to 256 characters.  Listing Price is required to be greater than zero to prevent underflow.  
 
 * Developed tests to test that a regular user is not able to execute ```onlyAdmin``` functions including assigning themselves as an administrator.
 
