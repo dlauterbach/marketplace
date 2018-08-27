@@ -17,11 +17,11 @@ class CreateListingModal extends React.Component {
               </FormGroup>
               <FormGroup>
                 <Label for="itemPrice">Price (ETH)</Label>
-                <Input type="text" name="itemPrice" id="itemPrice" onChange={this.props.inputChangeHandler} placeholder="Ex. .1"/>
+                <Input type="text" name="itemPrice" id="itemPrice" onChange={this.props.inputChangeHandler} placeholder="Ex. 1.0"/>
               </FormGroup>
               <FormGroup>
                 <Label for="itemDescription">Description</Label>
-                <Input type="textarea" name="itemDescription" id="itemDescription" onChange={this.props.inputChangeHandler} placeholder="Ex. Nice cowboy hat."/>
+                <Input type="textarea" name="itemDescription" id="itemDescription" onChange={this.props.inputChangeHandler} placeholder="Ex. Nice cowboy hat!"/>
               </FormGroup>
               <FormGroup>
                 <Label for="itemPhoto">Photo</Label>

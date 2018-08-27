@@ -77,7 +77,7 @@ To add a new listing, select ```My Listings``` and then ```Create Listing```. Pr
 
 ![Create Listing Modal](images/CreateListingModal.jpg)
 
-If you selected a photo, you will have to wait a few seconds for it to be uploaded to IPFS before your transaction is available in MetaMask for confirmation.  A few seconds after you confirm the transaction, when the block for the transaction has been mined, the new listing will appear under both ```All Listings``` and ```My Listings``` tabs:
+If you selected a photo, you will have to wait a few seconds for it to be uploaded to IPFS before your transaction is available in MetaMask for confirmation.  *(If testing this from behind a firewall, the upload to IPFS will fail if port 5001 is not open.)* A few seconds after you confirm the transaction, when the block for the transaction has been mined, the new listing will appear under both ```All Listings``` and ```My Listings``` tabs:
 
 ![Active Listing Page](images/ActiveListingPage.jpg)
 
