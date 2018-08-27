@@ -2,7 +2,7 @@
 
 Below is list of the measures taken to avoid common attacks.
 
-* The contract does not intentionally store a balance of Ether and has no functions to manage storage of Ether.
+* The contracts supporting this DApp do not intentionally store a balance of Ether and have no functions to manage storage of Ether.  This by itself reduces exposure to attacks.
 
 * There is only one "payable" function ```buyListing```.  This function performs all state variable updates first and then performs the transfer of Ether from buyer to seller last.
 
