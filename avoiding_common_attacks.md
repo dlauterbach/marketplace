@@ -11,5 +11,3 @@ Below is list of the measures taken to avoid common attacks.
 * Developed tests to test that a regular user is not able to execute ```onlyAdmin``` functions including assigning themselves as an administrator.
 
 * Implemented ```Ownable``` contract to restrict write access to the storage contract ```EternalStorage``` only to the business logic contract ```MarketPlace```.
-
-* Events are emitted by all functions that create or change state of a listing.  The DApp uses the ```createListingEvent``` event to retreive list of all listings from the transaction log. This avoids the need for a solidity function to loop over and return an array of undetermined length and risk exceeding the block gas limit.
